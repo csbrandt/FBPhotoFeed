@@ -25,7 +25,7 @@ define(function(require) {
       render: function() {
          var mainTemplate = Handlebars.compile(this.mainTemplate);
 
-         this.$el.html(mainTemplate());
+         this.$el.append(mainTemplate());
       }
 
    });

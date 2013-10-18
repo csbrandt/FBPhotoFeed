@@ -52,14 +52,6 @@ define(function(require) {
                     // login status of the person. In this case, we're handling the situation where they 
                     // have logged in to the app.
 
-                    FB.getLoginStatus(function(response) {
-                        console.log(response);
-                    });
-
-                    FB.api('/me/permissions', function(response) {
-                        console.log(response);
-                    });
-
                     this.getGraphData();
 
                 } else if (response.status === 'not_authorized') {

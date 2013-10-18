@@ -1,4 +1,9 @@
 /* styles */
+html, body
+{
+    background: #f0f0f0;
+    height: 100%;
+}
 .top-menu
 {
    position: fixed;
@@ -16,4 +21,50 @@
 .ink-grid.content {
    margin-top: 49px;
    margin-bottom: 10px;
+}
+.card-container {
+   background-color: white;
+   margin: 8px 0px;
+   -webkit-border-radius: 5px;
+   -moz-border-radius: 5px;
+   border-radius: 5px;
+   padding: 5px 5px;
+}
+
+.card-container img+div {
+	margin-top: 0;
+}
+
+.photo-social-container {
+   white-space: nowrap;
+   position: relative;
+   top: -25px;
+   right: 5px;
+}
+
+.photo-social-container i {
+   color: rgba(15, 117, 218, 0.75);
+   padding-left: 8px;
+}
+
+.photo-social-container span.ink-badge {
+   background-color: rgba(220, 220, 220, 0.65);
+}
+
+.from-name {
+	white-space: nowrap;
+	float: right;
+	clear: right;
+	padding-top: 5px;
+    padding-right: 5px;
+}
+
+.from-time {
+   float: right;
+   clear: right;
+   padding-right: 5px;
+}
+
+.user-header-container {
+	margin-bottom: 5px;
 }

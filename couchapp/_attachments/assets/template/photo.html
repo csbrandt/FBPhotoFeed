@@ -1,7 +1,9 @@
 <div class="photo-container">
-	<img src="{{}}" />
-	<i class="icon-thumbs-up"></i>
-	<span class="ink-badge white">{{likes}}</span>
-	<i class="icon-comment"></i>
-	<span class="ink-badge white">{{comments}}</span>
+	<a href="{{link}}"><img src="{{photoSrc}}" /></a>
+	<div class="photo-social-container pull-right">
+		<i class="icon-thumbs-up icon-large"></i>
+		<span class="ink-badge blue">{{numLikes}}</span>
+		<i class="icon-comment icon-large"></i>
+		<span class="ink-badge blue">{{numComments}}</span>
+	</div>
 </div>

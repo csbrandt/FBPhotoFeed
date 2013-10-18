@@ -20,29 +20,84 @@ define(function(require) {
     var cardTemplate = require('text!../../template/card.html');
 
     return Backbone.View.extend({
-    	headerTemplate: headerTemplate,
-    	photoTemplate: photoTemplate,
-    	locationTemplate: locationTemplate,
-    	cardTemplate: cardTemplate,
+        headerTemplate: headerTemplate,
+        photoTemplate: photoTemplate,
+        locationTemplate: locationTemplate,
+        cardTemplate: cardTemplate,
         events: {
 
         },
         initialize: function() {
-        	this.collection.on('add', this.render, this);
+            this.collection.on('add', this.render, this);
         },
         render: function(model) {
-        	var $cardContainer = $(this.cardTemplate);
+            var $cardContainer = $(this.cardTemplate);
+            this.model = model;
+            this.model.set('timeago', $.timeago(this.model.get('created_time')));
+            var headerTemplate = Handlebars.compile(this.headerTemplate);
+            var photoTemplate = Handlebars.compile(this.photoTemplate);
 
-        	var headerTemplate = Handlebars.compile(this.headerTemplate);
-        	$cardContainer.append(headerTemplate(/*data*/));
+            if (this.model.get('likes')) {
+            	this.model.set('numLikes', this.model.get('likes').data.length);
+            }
+            else {
+            	this.model.set('numLikes', 0);
+            }
 
-        	// get
-        	// user profile pic
+            if (this.model.get('comments')) {
+            	this.model.set('numComments', this.model.get('comments').data.length);
+            }
+            else {
+            	this.model.set('numComments', 0);
+            }
 
-        	// insert from newest to oldest,
-        	// inserting into dom as the models are added
+            var appendTemplates = function() {
+            	var modelJSON = this.model.toJSON();
 
-        	this.$el.append($cardContainer);
+            	$cardContainer.append(headerTemplate(modelJSON));
+            	$cardContainer.append(photoTemplate(modelJSON));
+
+                this.$el.append($cardContainer);
+            }.bind(this);
+
+            // get
+            // user profile pic
+            // photo
+            // static maps
+            // then render the card
+            $.when(this.getProfilePicture(this.model.get('from').id),
+                //this.getStaticMapSrc,
+                this.getPhotoSrc(this.model.get('object_id'))).done(appendTemplates);
+
+            // insert from newest to oldest,
+            // inserting into dom as the models are added
+
+
+        },
+        getProfilePicture: function(id) {
+            var deferred = $.Deferred();
+
+            FB.api(id + '?fields=picture', function(response) {
+                this.model.set('userProfilePictureSrc', response.picture.data.url);
+                deferred.resolve();
+            }.bind(this));
+
+            return deferred;
+        },
+        getStaticMapSrc: function() {
+            var deferred = $.Deferred();
+
+            return deferred;
+        },
+        getPhotoSrc: function(object_id) {
+            var deferred = $.Deferred();
+
+            FB.api(object_id, function(response) {
+            	this.model.set('photoSrc', response.source);
+            	deferred.resolve();
+            }.bind(this));
+
+            return deferred;
         }
     });
 });

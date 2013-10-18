@@ -52,9 +52,7 @@ define(function(require) {
             	this.model.set('numComments', 0);
             }
 
-            var appendTemplates = function() {
-            	var modelJSON = this.model.toJSON();
-
+            var appendTemplates = function(modelJSON) {
             	$cardContainer.append(headerTemplate(modelJSON));
             	$cardContainer.append(photoTemplate(modelJSON));
             	$cardContainer.append(locationTemplate(modelJSON));
@@ -67,40 +65,32 @@ define(function(require) {
             // photo
             // static maps
             // then render the card
-            $.when(this.getProfilePicture(this.model.get('from').id),
-                //this.getStaticMapSrc,
-                this.getPhotoSrc(this.model.get('object_id'))).then().done(appendTemplates);
-
+            $.when(this.getProfilePicture(this.model.toJSON())).then(this.getPhotoSrc).done(appendTemplates);
+            
+            // todo
             // insert from newest to oldest,
             // inserting into dom as the models are added
 
-
         },
-        getProfilePicture: function(id) {
-            var deferred = $.Deferred();
+        getProfilePicture: function(currentModelJSON) {
+            var deferred = new $.Deferred();
 
-            FB.api(id + '?fields=picture', function(response) {
-                this.model.set('userProfilePictureSrc', response.picture.data.url);
-                deferred.resolve();
+            FB.api(currentModelJSON.from.id + '?fields=picture', function(response) {
+                currentModelJSON.userProfilePictureSrc = response.picture.data.url;
+                deferred.resolve(currentModelJSON);
             }.bind(this));
 
-            return deferred;
+            return deferred.promise();
         },
-        getStaticMapSrc: function() {
-            var deferred = $.Deferred();
+        getPhotoSrc: function(currentModelJSON) {
+            var deferred = new $.Deferred();
 
-            return deferred;
-        },
-        getPhotoSrc: function(object_id) {
-            var deferred = $.Deferred();
-
-            FB.api(object_id, function(response) {
-            	this.model.set('photoSrc', response.source);
-            	this
-            	deferred.resolve();
+            FB.api(currentModelJSON.object_id, function(response) {
+            	currentModelJSON.photoSrc = response.source;
+            	deferred.resolve(currentModelJSON);
             }.bind(this));
 
-            return deferred;
+            return deferred.promise();
         }
     });
 });

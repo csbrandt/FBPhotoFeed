@@ -12,14 +12,18 @@ define(function(require) {
     var _ = require('lodash');
     var Backbone = require('backbone');
     var Handlebars = require('handlebars');
+    require('facebook');
+    require('timeago');
     var headerTemplate = require('text!../../template/user_header.html');
     var photoTemplate = require('text!../../template/photo.html');
     var locationTemplate = require('text!../../template/location.html');
+    var cardTemplate = require('text!../../template/card.html');
 
     return Backbone.View.extend({
     	headerTemplate: headerTemplate,
     	photoTemplate: photoTemplate,
     	locationTemplate: locationTemplate,
+    	cardTemplate: cardTemplate,
         events: {
 
         },
@@ -27,8 +31,13 @@ define(function(require) {
         	this.collection.on('add', this.render, this);
         },
         render: function(model) {
-        	var $cardContainer = $('<div></div>');
-        	$cardContainer.addClass('card-container');
+        	var $cardContainer = $(this.cardTemplate);
+
+        	var headerTemplate = Handlebars.compile(this.headerTemplate);
+        	$cardContainer.append(headerTemplate(/*data*/));
+
+        	// get
+        	// user profile pic
 
         	// insert from newest to oldest,
         	// inserting into dom as the models are added

@@ -15,7 +15,8 @@ require.config(
       backbone: '../vendor/backbone/backbone-min',
       handlebars: '../vendor/handlebars/handlebars',
       ink: '../vendor/ink-2.2.1/js/ink.min',
-      facebook: '//connect.facebook.net/en_US/all'
+      facebook: '//connect.facebook.net/en_US/all',
+      timeago: '../vendor/timeago/jquery.timeago'
    },
    shim:
    {
@@ -32,9 +33,13 @@ require.config(
       {
          exports: 'Handlebars'
       },
-      facebook : 
+      facebook: 
       {
          exports: 'FB'
+      },
+      timeago:
+      {
+         deps: ['jquery']
       }
 
    },

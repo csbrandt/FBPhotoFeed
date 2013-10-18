@@ -86,8 +86,13 @@ define(function(require) {
             var deferred = new $.Deferred();
 
             FB.api(currentModelJSON.object_id, function(response) {
-            	currentModelJSON.photoSrc = response.source;
-            	deferred.resolve(currentModelJSON);
+                if (!response.error) {
+                   currentModelJSON.photoSrc = response.source;
+                   deferred.resolve(currentModelJSON);
+                }
+                else {
+                   deferred.reject(response.error);
+                }
             }.bind(this));
 
             return deferred.promise();

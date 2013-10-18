@@ -1,0 +1,9 @@
+[{ 
+        "from": "", 
+        "to": "/index.html", 
+        "method": "GET"
+},{
+	    "from": "/assets/*",
+	    "to": "/assets/*",
+	    "method": "*"
+}] 

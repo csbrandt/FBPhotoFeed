@@ -14,7 +14,8 @@ require.config(
       lodash: '../vendor/lodash/lodash.min',
       backbone: '../vendor/backbone/backbone-min',
       handlebars: '../vendor/handlebars/handlebars',
-      ink: '../vendor/ink-2.2.1/js/ink.min'
+      ink: '../vendor/ink-2.2.1/js/ink.min',
+      facebook: '//connect.facebook.net/en_US/all'
    },
    shim:
    {
@@ -30,6 +31,10 @@ require.config(
       handlebars: 
       {
          exports: 'Handlebars'
+      },
+      facebook : 
+      {
+         exports: 'FB'
       }
 
    },

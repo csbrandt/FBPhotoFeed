@@ -6,6 +6,8 @@
 
 define(function(require)
 {
+   "use strict";
+   // dependencies
    var _ = require('lodash');
    var Backbone = require('backbone');
    var MainView = require('view/Main'); 

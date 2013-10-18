@@ -2,10 +2,17 @@
         <div class="top-menu">
                 <nav class="ink-navigation ink-grid">
                         <ul class="menu horizontal grey flat">
-                                
+                                <li class="active"><a href="#">PhotoFeed</a></li>
+                                <li id="login_button" class="push-right">
+                                        <fb:login-button width="200" scope="read_stream"></fb:login-button>
+                                </li>
                         </ul>
                 </nav>
         </div>
-        <div id="content" class="ink-grid"></div>
+        <div class="ink-grid content">
+                <div class="column-group">
+                       <div id="content" class="small-100 medium-85 large-75"></div>
+                </div>
+        </div>
         <div class="push"></div>
 </div>

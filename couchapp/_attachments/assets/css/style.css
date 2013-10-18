@@ -1,1 +1,19 @@
 /* styles */
+.top-menu
+{
+   position: fixed;
+   top: 0;
+   left: 0;
+   right: 0;
+   background: rgb(217, 217, 217);
+   z-index: 100;
+}
+
+#login_button {
+	margin: 10px 0px;
+}
+
+.ink-grid.content {
+   margin-top: 49px;
+   margin-bottom: 10px;
+}

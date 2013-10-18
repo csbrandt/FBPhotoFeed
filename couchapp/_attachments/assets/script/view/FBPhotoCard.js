@@ -36,6 +36,7 @@ define(function(require) {
             this.model.set('timeago', $.timeago(this.model.get('created_time')));
             var headerTemplate = Handlebars.compile(this.headerTemplate);
             var photoTemplate = Handlebars.compile(this.photoTemplate);
+            var locationTemplate = Handlebars.compile(this.locationTemplate);
 
             if (this.model.get('likes')) {
             	this.model.set('numLikes', this.model.get('likes').data.length);
@@ -56,6 +57,7 @@ define(function(require) {
 
             	$cardContainer.append(headerTemplate(modelJSON));
             	$cardContainer.append(photoTemplate(modelJSON));
+            	$cardContainer.append(locationTemplate(modelJSON));
 
                 this.$el.append($cardContainer);
             }.bind(this);
@@ -67,7 +69,7 @@ define(function(require) {
             // then render the card
             $.when(this.getProfilePicture(this.model.get('from').id),
                 //this.getStaticMapSrc,
-                this.getPhotoSrc(this.model.get('object_id'))).done(appendTemplates);
+                this.getPhotoSrc(this.model.get('object_id'))).then().done(appendTemplates);
 
             // insert from newest to oldest,
             // inserting into dom as the models are added
@@ -94,6 +96,7 @@ define(function(require) {
 
             FB.api(object_id, function(response) {
             	this.model.set('photoSrc', response.source);
+            	this
             	deferred.resolve();
             }.bind(this));
 

@@ -1,12 +1,21 @@
 FBPhotoFeed
 ================
 
-
-## Usage
-
+FBPhotoFeed is a web application that utilizes the Facebook JavaScript SDK and Graph API to display the geotagged photos of your friends. 
+This app also makes use of the Static Maps API from Google to show small thumbnail maps of where the photo was taken.
 
 ## Dependencies
 
++ [Facebook JavaScript SDK](http://developers.facebook.com/docs/reference/javascript/)
++ [Google Static Maps API](https://developers.google.com/maps/documentation/staticmaps/)
++ [text.js](https://github.com/requirejs/text)
++ [jQuery - v2.0.3](http://jquery.com/)
++ [Require.js - v2.1.9](http://requirejs.org/)
++ [Lo-Dash v2.2.1](http://lodash.com/)
++ [Backbone.js v1.1.0](http://backbonejs.org/)
++ [Handlebars.js v1.0.0](http://handlebarsjs.com/)
++ [Ink v2.2.1](http://ink.sapo.pt/)
++ [timeago v1.3.0](http://timeago.yarp.com/)
 
 ## License
 
